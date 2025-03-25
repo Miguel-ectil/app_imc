@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 textViewResult.text = "Resultado: IMC = %.2f".format(imc)
             } else {
                 // Caso o usuário insira valores inválidos
-                textViewResult.text = "Por favor, insira valores válidos para peso e altura!"
+                textViewResult.text = "Por favor, insira valores válidos para \n peso e altura!"
             }
         }
     }
