@@ -55,10 +55,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:padding="16dp"
-        android:textColor="#000000"
+        android:textColor="#FFFF"
         android:textSize="18dp"
         android:fontFamily="sans-serif-black"
-        android:background="@drawable/rounded_button" />
+      android:backgroundTint="#6200EE"/>
 
     <!-- Resultado do IMC -->
     <!-- Resultado do IMC -->
