@@ -5,7 +5,7 @@ Este é um aplicativo Android simples que permite ao usuário calcular o Índice
 ### Este aplicativo faz parte do meu aprendizado de Kotlin.
 Estou desenvolvendo este projeto como parte do meu processo de aprendizado da linguagem de programação Kotlin. Ao construir este app, aprendi sobre desenvolvimento Android, interface de usuário, cálculos aritméticos e validação de entradas. Este é um projeto simples, mas muito importante para praticar a lógica de programação em Kotlin e familiarizar-me com as ferramentas de desenvolvimento Android.
 
-## Como Usar
+## 🚀 Como Usar
 1. Instalar o aplicativo: Baixe o APK ou execute o app diretamente do Android Studio em seu dispositivo.
 2. Insira seus dados:
     - Peso: Digite seu peso em quilogramas (kg).
@@ -17,7 +17,7 @@ Estou desenvolvendo este projeto como parte do meu processo de aprendizado da li
 - SDK Android: Verifique se você possui a versão mais recente do SDK do Android.
 - Dispositivo ou emulador Android para testar o aplicativo.
 
-## Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 - Kotlin: Linguagem de programação utilizada para o desenvolvimento do aplicativo.
 - Android SDK: Ferramentas e bibliotecas nativas do Android para o desenvolvimento do app.
 - ConstraintLayout: Layout utilizado para posicionamento dos elementos na tela.
@@ -42,6 +42,6 @@ Estou desenvolvendo este projeto como parte do meu processo de aprendizado da li
 
 ```
 
-Licença
+## 📜 Licença
 Este projeto é licenciado sob a licença MIT. Veja o arquivo LICENSE para mais informações.
 
