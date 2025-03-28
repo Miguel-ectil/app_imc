@@ -5,8 +5,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    tools:context=".MainActivity"> <!-- android:background="#FFEB3B" -->
+    android:background="@drawable/background_gradient"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/text_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seja Bem-vindo ao App!"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Imagem no topo -->
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:src="@drawable/bmi"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calcúlo IMC!"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="270dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Campo de Peso -->
     <EditText
@@ -15,15 +52,19 @@
         android:layout_height="wrap_content"
         android:hint="Peso (kg)"
         android:inputType="numberDecimal"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_input"
+        android:layout_marginTop="50dp"
+        android:padding="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:elevation="4dp"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="16dp"
-        android:textColor="#000000"
-        android:background="@drawable/rounded_input" />  <!-- Aplicando a borda ao EditText -->
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />  <!-- Ajustado para ficar abaixo da imagem -->
 
     <!-- Campo de Altura -->
     <EditText
@@ -32,15 +73,18 @@
         android:layout_height="wrap_content"
         android:hint="Altura (m)"
         android:inputType="numberDecimal"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_input"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:elevation="4dp"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextWeight"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="16dp"
-        android:textColor="#000000"
-        android:background="@drawable/rounded_input" />
+        app:layout_constraintTop_toBottomOf="@id/editTextWeight" /> <!-- Ajustado para ficar abaixo do campo Peso -->
 
     <!-- Botão de Calcular -->
     <Button
@@ -48,19 +92,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Calcular IMC"
+        android:textColor="#FFFF"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:backgroundTint="#6200EE"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextHeight"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="16dp"
-        android:textColor="#FFFF"
-        android:textSize="18dp"
-        android:fontFamily="sans-serif-black"
-      android:backgroundTint="#6200EE"/>
+        android:layout_marginTop="40dp" />
 
-    <!-- Resultado do IMC -->
     <!-- Resultado do IMC -->
     <TextView
         android:id="@+id/textViewResult"
@@ -69,20 +112,14 @@
         android:text="Resultado: "
         android:textSize="24sp"
         android:textColor="#ffffff"
-        android:fontFamily="sans-serif-medium"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:padding="16dp"
         android:elevation="4dp"
-        android:shadowColor="#000000"
-        android:shadowDx="0"
-        android:shadowDy="2"
-        android:shadowRadius="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonCalculate" />
+        app:layout_constraintTop_toBottomOf="@id/buttonCalculate"
+        android:layout_marginTop="20dp" />
 
     <!-- Texto de erro (invisível por padrão) -->
     <TextView
@@ -90,17 +127,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Por favor, insira dados válidos!"
-        android:textColor="#F44336"
+        android:textColor="#c22e1a"
         android:textSize="16sp"
         android:visibility="gone"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:padding="12dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/textViewResult"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
