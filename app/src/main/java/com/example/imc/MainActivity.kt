@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
                 textViewResult.text = "IMC = %.2f\n%s".format(imc, classification)
 
-                // Fechar o teclado após o cálculo
                 hideKeyboard()
             } else {
                 textViewResult.text = "Por favor, insira valores válidos para peso e altura!"
