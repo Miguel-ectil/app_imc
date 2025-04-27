@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.imc.database.ImcDatabase
 import com.example.imc.model.ImcEntity
 import kotlinx.coroutines.launch
+import android.content.Intent
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +52,10 @@ class MainActivity : AppCompatActivity() {
                     if (insertedId != null) {
                         // Mostrar a mensagem de sucesso com o ID inserido
                         Toast.makeText(this@MainActivity, "IMC salvo com sucesso! ID: $insertedId", Toast.LENGTH_LONG).show()
+
+                        // Redirecionar para a ImcListActivity
+                        val intent = Intent(this@MainActivity, ImcListActivity::class.java)
+                        startActivity(intent)
                     } else {
                         // Se não houver ID (caso algo tenha dado errado)
                         Toast.makeText(this@MainActivity, "Erro ao salvar IMC", Toast.LENGTH_SHORT).show()
@@ -61,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 textViewResult.text = "Por favor, insira valores válidos para peso e altura!"
             }
         }
+
     }
 
     private fun getImcClassification(imc: Float): String {

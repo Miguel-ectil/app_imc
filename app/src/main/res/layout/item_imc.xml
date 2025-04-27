@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="16dp"
+    android:elevation="6dp"
+    android:backgroundTint="#FAFAFA"
+    android:clipToOutline="true"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_card">
+
+    <TextView
+        android:id="@+id/peso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Peso:"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:id="@+id/altura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Altura:"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:id="@+id/imc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IMC:"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_delete"
+        android:contentDescription="Deletar"
+        android:layout_gravity="end"
+        android:layout_marginLeft="16dp"/>
+</LinearLayout>
