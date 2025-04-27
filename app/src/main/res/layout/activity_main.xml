@@ -136,4 +136,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+<!--    <Button-->
+<!--        android:id="@+id/buttonListImc"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Mostrar lista de Imcs"-->
+<!--        android:textColor="#FFFF"-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:padding="16dp"-->
+<!--        android:backgroundTint="#6200EE"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/editTextHeight"-->
+<!--        android:layout_marginTop="190dp" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
