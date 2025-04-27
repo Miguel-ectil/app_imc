@@ -43,6 +43,15 @@
         android:textStyle="bold" />
 
     <ImageView
+        android:id="@+id/edit_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:contentDescription="Editar"
+        android:layout_gravity="end"
+        android:layout_marginLeft="16dp"/>
+
+    <ImageView
         android:id="@+id/delete_button"
         android:layout_width="24dp"
         android:layout_height="24dp"

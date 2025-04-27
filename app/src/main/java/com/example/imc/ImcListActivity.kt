@@ -1,5 +1,6 @@
 package com.example.imc
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -22,7 +23,6 @@ data class Imc(
     val imc: String
 )
 
-
 class ImcListActivity : AppCompatActivity() {
 
     private lateinit var recyclerViewImcs: RecyclerView
@@ -36,16 +36,39 @@ class ImcListActivity : AppCompatActivity() {
         recyclerViewImcs = findViewById(R.id.recyclerViewImcs)
         recyclerViewImcs.layoutManager = LinearLayoutManager(this)
 
+        // Observando a lista de IMCs
         _listaImc.observe(this, Observer { listaImc ->
             val listaMutable = listaImc.toMutableList()  // Converte a lista imutável para mutável
-            imcAdapter = ImcAdapter(listaMutable) { imc ->
-                deleteImc(imc) // Chama a função de exclusão
-            }
+            imcAdapter = ImcAdapter(listaMutable,
+                onDeleteClicked = { imc ->
+                    deleteImc(imc) // Função para deletar item
+                },
+                onEditClicked = { imc ->
+                    editImc(imc)   // Função para editar item
+                }
+            )
             recyclerViewImcs.adapter = imcAdapter
             imcAdapter.notifyDataSetChanged()  // Atualiza o adapter
         })
 
+        // Carregar a lista sempre que a tela for acessada
         loadImcsFromDatabase()
+
+        // Atualizar a lista caso a tela seja trazida de volta, como após editar ou excluir um item
+        val intent = intent
+        val refreshData = intent.getBooleanExtra("refreshData", false)
+        if (refreshData) {
+            loadImcsFromDatabase()  // Recarrega a lista de dados
+        }
+    }
+
+    private fun editImc(imc: Imc) {
+        val intent = Intent(this, EditImcActivity::class.java)
+        intent.putExtra("uid", imc.uid)
+        intent.putExtra("peso", imc.peso)
+        intent.putExtra("altura", imc.altura)
+        intent.putExtra("imc", imc.imc)
+        startActivity(intent)
     }
 
     private fun loadImcsFromDatabase() {
@@ -74,7 +97,6 @@ class ImcListActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun deleteImc(imc: Imc) {
         Log.d("ImcListActivity", "Tentando deletar IMC: ${imc.peso}, ${imc.altura}, UID: ${imc.uid}")
