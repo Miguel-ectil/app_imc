@@ -10,7 +10,7 @@ interface ImcDao {
 
     // Inserir um ou mais registros
     @Insert
-    suspend fun inserir(imcEntities: List<ImcEntity>): List<Long>  // Retorna a lista de IDs inseridos
+    suspend fun inserir(imcEntities: List<ImcEntity>): List<Long>
 
     // Buscar todos os registros ordenados por ID
     @Query("SELECT * FROM tabela_imc ORDER BY uid DESC")
@@ -32,3 +32,4 @@ interface ImcDao {
     @Query("DELETE FROM tabela_imc WHERE uid = :id")
     suspend fun deletar(id: Int)
 }
+
