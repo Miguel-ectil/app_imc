@@ -5,10 +5,10 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_margin="16dp"
-    android:elevation="6dp"
+    android:elevation="10dp"
     android:backgroundTint="#FAFAFA"
     android:clipToOutline="true"
-    android:layout_marginBottom="12dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/bg_card">
 
     <TextView
@@ -42,14 +42,21 @@
         android:paddingBottom="4dp"
         android:textStyle="bold" />
 
+    <GridLayout
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:orientation="horizontal"
+    android:gravity="end"
+    android:layout_marginTop="8dp">
+
     <ImageView
         android:id="@+id/edit_button"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@android:drawable/ic_menu_edit"
         android:contentDescription="Editar"
-        android:layout_gravity="end"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="268dp"/>
 
     <ImageView
         android:id="@+id/delete_button"
@@ -57,6 +64,6 @@
         android:layout_height="24dp"
         android:src="@android:drawable/ic_delete"
         android:contentDescription="Deletar"
-        android:layout_gravity="end"
-        android:layout_marginLeft="16dp"/>
-</LinearLayout>
+    android:layout_marginStart="8dp"/>
+</GridLayout>
+    </LinearLayout>

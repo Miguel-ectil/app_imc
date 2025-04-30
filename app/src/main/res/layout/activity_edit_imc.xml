@@ -2,34 +2,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="#f4f4f4">
+    <!--    android:gravity="center"-->
 
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar IMC"
+        android:textColor="#333333"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:src="@drawable/bmi"
+        android:layout_marginTop="2dp" />
+
+    <!-- Campo de Peso -->
     <EditText
         android:id="@+id/pesoEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Peso"
-        android:inputType="numberDecimal"/>
+        android:hint="Peso (kg)"
+        android:inputType="numberDecimal"
+        android:textColor="#333333"
+        android:background="@drawable/edit_text_style"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"/>
 
+    <!-- Campo de Altura -->
     <EditText
         android:id="@+id/alturaEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Altura"
-        android:inputType="numberDecimal"/>
+        android:hint="Altura (m)"
+        android:inputType="numberDecimal"
+        android:textColor="#333333"
+        android:background="@drawable/edit_text_style"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"/>
 
+    <!-- Texto IMC -->
     <TextView
         android:id="@+id/imcTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IMC"
+        android:text="IMC: Não Calculado"
+        android:textColor="#444444"
         android:textSize="18sp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:padding="8dp"/>
 
+    <!-- Botão de Salvar -->
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar"
-        android:layout_marginTop="16dp"/>
+        android:text="Salvar Alterações"
+        android:textColor="#ffffff"
+        android:backgroundTint="#009688"
+        android:textSize="16sp"
+        android:layout_marginTop="30dp"
+        android:padding="14dp"
+        android:layout_gravity="center"/>
+
 </LinearLayout>

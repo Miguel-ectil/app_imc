@@ -12,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 
 class EditImcActivity : AppCompatActivity() {
 
@@ -34,7 +36,20 @@ class EditImcActivity : AppCompatActivity() {
         val peso = intent.getStringExtra("peso")
         val altura = intent.getStringExtra("altura")
         val imc = intent.getStringExtra("imc")
-        imcId = intent.getIntExtra("uid", -1)  // Obtendo o ID do IMC
+        imcId = intent.getIntExtra("uid", -1)
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateImc()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        pesoEditText.addTextChangedListener(textWatcher)
+        alturaEditText.addTextChangedListener(textWatcher)
 
         peso?.let {
             pesoEditText.setText(it.replace("[^0-9.]".toRegex(), ""))  // Remove "kg" ou qualquer outro texto
@@ -58,7 +73,7 @@ class EditImcActivity : AppCompatActivity() {
             val novoImc = calculateImc(novoPeso, novaAltura)
 
             if (imcId != -1) {  // Verifica se o ID do IMC foi recuperado corretamente
-                saveImc(imcId, novoPeso, novaAltura, novoImc)
+                saveImc(imcId, novoPeso, novaAltura)
             } else {
                 Toast.makeText(this, "ID do IMC não encontrado!", Toast.LENGTH_SHORT).show()
             }
@@ -74,13 +89,13 @@ class EditImcActivity : AppCompatActivity() {
         return "IMC: %.2f".format(imc)
     }
 
-    // Função para salvar a atualização no banco de dados
-    private fun saveImc(id: Int, peso: Float, altura: Float, imc: String) {
+    private fun saveImc(id: Int, peso: Float, altura: Float) {
         val db = ImcDatabase.getDatabase(this)
+        val imc = peso / (altura * altura)  // Calcular o IMC como Float
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                db.imcDao().atualizar(id, peso, altura)
+                db.imcDao().atualizar(id, peso, altura, imc)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@EditImcActivity, "IMC Atualizado!", Toast.LENGTH_SHORT).show()
                 }
@@ -89,6 +104,18 @@ class EditImcActivity : AppCompatActivity() {
                     Toast.makeText(this@EditImcActivity, "Erro ao atualizar IMC.", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun updateImc() {
+        val peso = pesoEditText.text.toString().toFloatOrNull() ?: 0f
+        val altura = alturaEditText.text.toString().toFloatOrNull() ?: 0f
+
+        if (peso > 0 && altura > 0) {
+            val imc = peso / (altura * altura)
+            imcTextView.text = "IMC: %.2f".format(imc)
+        } else {
+            imcTextView.text = "IMC: -"
         }
     }
 }

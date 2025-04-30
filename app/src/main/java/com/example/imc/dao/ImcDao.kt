@@ -18,15 +18,17 @@ interface ImcDao {
 
     // Atualizar um registro específico
     @Query("""
-        UPDATE tabela_imc 
-        SET peso = :novoPeso, altura = :novaAltura 
-        WHERE uid = :id
-    """)
+    UPDATE tabela_imc 
+    SET peso = :novoPeso, altura = :novaAltura, resultadoImc = :resultadoImc
+    WHERE uid = :id
+""")
     suspend fun atualizar(
         id: Int,
         novoPeso: Float,
-        novaAltura: Float
+        novaAltura: Float,
+        resultadoImc: Float
     )
+
 
     // Deletar um registro específico
     @Query("DELETE FROM tabela_imc WHERE uid = :id")

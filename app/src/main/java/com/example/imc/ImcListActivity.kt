@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 data class Imc(
-    val uid: Int,   // O campo uid precisa estar presente aqui
+    val uid: Int,
     val peso: String,
     val altura: String,
     val imc: String
@@ -27,7 +28,15 @@ class ImcListActivity : AppCompatActivity() {
 
     private lateinit var recyclerViewImcs: RecyclerView
     private lateinit var imcAdapter: ImcAdapter
-    private val _listaImc = MutableLiveData<List<Imc>>() // LiveData para armazenar a lista de IMCs
+    private val _listaImc = MutableLiveData<List<Imc>>() // LiveData da lista de IMCs
+
+    // Cria o launcher para receber o resultado da edição
+    private val editImcLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        // Sempre recarrega a lista após a tela de edição voltar
+        loadImcsFromDatabase()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,30 +45,21 @@ class ImcListActivity : AppCompatActivity() {
         recyclerViewImcs = findViewById(R.id.recyclerViewImcs)
         recyclerViewImcs.layoutManager = LinearLayoutManager(this)
 
-        // Observando a lista de IMCs
         _listaImc.observe(this, Observer { listaImc ->
-            val listaMutable = listaImc.toMutableList()  // Converte a lista imutável para mutável
+            val listaMutable = listaImc.toMutableList()
             imcAdapter = ImcAdapter(listaMutable,
                 onDeleteClicked = { imc ->
-                    deleteImc(imc) // Função para deletar item
+                    deleteImc(imc)
                 },
                 onEditClicked = { imc ->
-                    editImc(imc)   // Função para editar item
+                    editImc(imc)
                 }
             )
             recyclerViewImcs.adapter = imcAdapter
-            imcAdapter.notifyDataSetChanged()  // Atualiza o adapter
+            imcAdapter.notifyDataSetChanged()
         })
 
-        // Carregar a lista sempre que a tela for acessada
         loadImcsFromDatabase()
-
-        // Atualizar a lista caso a tela seja trazida de volta, como após editar ou excluir um item
-        val intent = intent
-        val refreshData = intent.getBooleanExtra("refreshData", false)
-        if (refreshData) {
-            loadImcsFromDatabase()  // Recarrega a lista de dados
-        }
     }
 
     private fun editImc(imc: Imc) {
@@ -68,7 +68,7 @@ class ImcListActivity : AppCompatActivity() {
         intent.putExtra("peso", imc.peso)
         intent.putExtra("altura", imc.altura)
         intent.putExtra("imc", imc.imc)
-        startActivity(intent)
+        editImcLauncher.launch(intent) // <-- Usa o launcher para esperar o resultado
     }
 
     private fun loadImcsFromDatabase() {
@@ -80,7 +80,7 @@ class ImcListActivity : AppCompatActivity() {
 
                 val imcList = imcEntityList.map { entity ->
                     Imc(
-                        uid = entity.uid,  // Garantir que o UID é mapeado corretamente
+                        uid = entity.uid,
                         peso = "Peso: ${entity.peso}kg",
                         altura = "Altura: ${entity.altura}m",
                         imc = "IMC: ${entity.resultadoImc}"
@@ -104,14 +104,13 @@ class ImcListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val db = ImcDatabase.getDatabase(this@ImcListActivity)
-                db.imcDao().deletar(imc.uid)  // Passando o UID corretamente
+                db.imcDao().deletar(imc.uid)
 
-                // Recarregar a lista após a exclusão
                 withContext(Dispatchers.Main) {
                     val updatedList = _listaImc.value?.toMutableList()?.apply {
-                        remove(imc) // Remove o item da lista local
+                        remove(imc)
                     }
-                    _listaImc.value = updatedList  // Atualiza o LiveData com a nova lista
+                    _listaImc.value = updatedList
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

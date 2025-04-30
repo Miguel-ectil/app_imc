@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
                     if (insertedId != null) {
                         // Mostrar a mensagem de sucesso com o ID inserido
-                        Toast.makeText(this@MainActivity, "IMC salvo com sucesso! ID: $insertedId", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "IMC cadastrado com sucesso! ID: $insertedId", Toast.LENGTH_LONG).show()
 
                         // Redirecionar para a ImcListActivity
                         val intent = Intent(this@MainActivity, ImcListActivity::class.java)
